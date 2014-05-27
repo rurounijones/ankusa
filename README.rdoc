@@ -6,6 +6,8 @@ Ankusa is a text classifier in Ruby that can use either Hadoop's HBase, Mongo, o
 
 Ankusa currently provides both a Naive Bayes and Kullback-Leibler divergence classifier.  It ignores common words (a.k.a, stop words) and stems all others.  Additionally, it uses Laplacian smoothing in both classification methods.
 
+This library supports versions of ruby from 1.9.3 onwards. It also has experimental support for jruby
+
 == Installation
 First, install HBase/Hadoop, Mongo, or Cassandra (>= 0.7.0-rc2).  Then, install the appropriate gem:
   gem install hbaserb

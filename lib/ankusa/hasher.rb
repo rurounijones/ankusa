@@ -1,9 +1,9 @@
-require 'fast_stemmer'
+require RUBY_PLATFORM == 'java' ? 'jruby-stemmer' : 'fast_stemmer'
 require 'ankusa/stopwords'
 
 module Ankusa
 
-  class TextHash < Hash 
+  class TextHash < Hash
     attr_reader :word_count
 
     def initialize(text=nil, stem=true)
@@ -26,7 +26,7 @@ module Ankusa
       if text.instance_of? Array
         text.each { |t| add_text t }
       else
-        # replace dashes with spaces, then get rid of non-word/non-space characters, 
+        # replace dashes with spaces, then get rid of non-word/non-space characters,
         # then split by space to get words
         words = TextHash.atomize text
         words.each { |word| add_word(word) if TextHash.valid_word?(word) }
