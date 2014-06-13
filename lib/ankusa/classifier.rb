@@ -21,9 +21,7 @@ module Ankusa
       doccount = (text.kind_of? Array) ? text.length : 1
       @storage.incr_doc_count klass, doccount
       @classnames << klass unless @classnames.include? klass
-      # cache is now dirty of these vars
-      @doc_count_totals = nil
-      @vocab_sizes = nil
+      self.clear_caches
       th
     end
 
@@ -38,9 +36,7 @@ module Ankusa
       @storage.incr_total_word_count klass, -th.word_count
       doccount = (text.kind_of? Array) ? text.length : 1
       @storage.incr_doc_count klass, -doccount
-      # cache is now dirty of these vars
-      @doc_count_totals = nil
-      @vocab_sizes = nil
+      self.clear_caches
       th
     end
 
@@ -65,6 +61,11 @@ module Ankusa
 
     def vocab_sizes
       @vocab_sizes ||= @storage.get_vocabulary_sizes
+    end
+
+    def clear_caches
+      @doc_count_totals = nil
+      @vocab_sizes = nil
     end
 
   end
